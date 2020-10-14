@@ -1,8 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link :to="{ name: 'About' }">About</router-link>
+      <router-link :to="{ name: 'event-list' }">List</router-link> |
+      <router-link :to="{ name: 'event-create' }">Create page</router-link> |
+      <router-link :to="{ name: 'dr01', params: { username01: 'expl01' } }">
+        dinamic routs 01
+      </router-link>
+      |
+      <router-link :to="{ name: 'dr02', params: { username02: 'expl02' } }">
+        dinamic routs 02
+      </router-link>
     </div>
     <router-view />
   </div>
