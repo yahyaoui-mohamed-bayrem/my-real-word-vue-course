@@ -2,7 +2,7 @@
   <div>
     <!-- Mastering Vuex course lesson 4 : mutation & actions -->
     <h1>Create an event</h1>
-  <form @submit.prevent="createEvent">
+    <form @submit.prevent="createEvent">
       <label>Select a category</label>
       <select v-model="event.category">
         <option v-for="cat in categories" :key="cat">{{ cat }}</option>
@@ -35,16 +35,12 @@
       <div class="field">
         <label>Select a time</label>
         <select v-model="event.time">
-
           <option v-for="time in times" :key="time">{{ time }}</option>
-
         </select>
       </div>
 
       <input type="submit" class="button -fill-gradient" value="Submit"/>
-
     </form>
-
     <!-- Mastering Vuex course lesson 3 : state & getters -->
     <!-- <h1>Create event, {{ user.name }}</h1>
     <p> this event was created by {{ user.id }}</p>
@@ -58,12 +54,13 @@
 
 <script>
 // Mastering Vuex course lesson 4 : mutation & actions
-import Datepicker from 'vuejs-datepivcker'
+import Datepicker from 'vuejs-datepicker'
 
 export default {
   components: {
-    Datepicker,
-    data() {
+    Datepicker
+  },
+    data() {// eslint-disable-line vue/no-unused-components
       const times =[]
       for (let i = 1; i <= 24; i++){
         times.push(i + ':00')
@@ -74,8 +71,18 @@ export default {
         event: this.createFreshEventObject()
       }
     },
-  },
   methods: {
+    createEvent(){
+      this.$store.dispatch('createEvent', this.event).then(() => {
+        this.$router.push({
+          name: 'event-show',
+          params: this.event.id
+        })
+        this.event = this.createFreshEventObject()
+      }).catch (() => {
+        console.log('There was a problem creating your event')
+      })
+    },
     createFreshEventObject() {
       const user = this.$store.state.user
       const id = Math.floor(Math.random() * 10000000)
@@ -89,13 +96,13 @@ export default {
         location: '',
         date: '',
         time: '',
-        attendies: []
+        attendees: []
       }
     }
   }
 }
 
-//  Mastering Vuex course lesson 3 : state & getters :
+//  //Mastering Vuex course lesson 3 : state & getters :
 // import { mapState, mapGetters } from 'vuex'
 
 // export default {
