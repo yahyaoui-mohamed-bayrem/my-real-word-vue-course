@@ -62,8 +62,37 @@ import Datepicker from 'vuejs-datepivcker'
 
 export default {
   components: {
-    Datepicker
+    Datepicker,
+    data() {
+      const times =[]
+      for (let i = 1; i <= 24; i++){
+        times.push(i + ':00')
+      }
+      return {
+        times,
+        categories: this.$store.state.categories,
+        event: this.createFreshEventObject()
+      }
+    },
   },
+  methods: {
+    createFreshEventObject() {
+      const user = this.$store.state.user
+      const id = Math.floor(Math.random() * 10000000)
+      return {
+        id,
+        user,
+        category: '',
+        organizer: user,
+        title: '',
+        description: '',
+        location: '',
+        date: '',
+        time: '',
+        attendies: []
+      }
+    }
+  }
 }
 
 //  Mastering Vuex course lesson 3 : state & getters :
@@ -107,4 +136,8 @@ export default {
 // }
 </script>
 
-<style></style>
+<style scoped>
+.field {
+  margin-bottom: 24px;
+}
+</style>

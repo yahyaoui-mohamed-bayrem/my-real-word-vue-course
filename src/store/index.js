@@ -31,7 +31,11 @@ export default new Vuex.Store({
       { id: 4, title: '...', organizer: '...' },
     ]
   },
-  mutations: {},
+  mutations: {
+    ADD_EVENT(state, event){
+      
+    }
+  },
   actions: {},
   modules: {},
   getters: {
